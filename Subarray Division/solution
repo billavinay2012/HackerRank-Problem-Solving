@@ -1,0 +1,47 @@
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the birthday function below.
+def birthday(s, d, m):
+    answerList=[]
+    if len(s)==1:
+        if s[0]==d and m==1:
+            return 1
+        else:
+            return 0
+    
+    for i in range(len(s)-1):
+        sum=s[i]
+        myList=[s[i]]
+        j=i+1
+        while sum<d and j<len(s):
+            sum+=s[j]
+            myList.append(s[j])
+            j+=1
+        if sum==d and len(myList)==m:
+            answerList.append(myList)
+    return len(answerList)
+            
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n = int(raw_input().strip())
+
+    s = map(int, raw_input().rstrip().split())
+
+    dm = raw_input().rstrip().split()
+
+    d = int(dm[0])
+
+    m = int(dm[1])
+    
+    result = birthday(s, d, m)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()
