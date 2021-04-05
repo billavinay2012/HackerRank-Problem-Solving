@@ -1,0 +1,97 @@
+''' copy this code to github
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'climbingLeaderboard' function below.
+#
+# The function is expected to return an INTEGER_ARRAY.
+# The function accepts following parameters:
+#  1. INTEGER_ARRAY ranked
+#  2. INTEGER_ARRAY player
+#
+
+def findrank(mydict,i):
+    for j in mydict:
+        if i>=j:
+            return mydict[j]
+    return mydict[j]+1
+
+def climbingLeaderboard(ranked, player):
+    # Write your code here
+    mydict={}
+    answerlist=[]
+    uniquelist=list(set(ranked))
+    uniquelist.sort(key=None, reverse=True)
+    j=1
+    for i in uniquelist:
+        mydict.update({i:j})
+        j+=1
+        
+    for i in player:
+        answerlist.append(findrank(mydict,i))
+    return answerlist
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    ranked_count = int(input().strip())
+
+    ranked = list(map(int, input().rstrip().split()))
+
+    player_count = int(input().strip())
+
+    player = list(map(int, input().rstrip().split()))
+
+    result = climbingLeaderboard(ranked, player)
+
+    fptr.write('\n'.join(map(str, result)))
+    fptr.write('\n')
+
+    fptr.close()
+copy this code to github'''
+
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the climbingLeaderboard function below.
+def climbingLeaderboard(a,b):
+    a = sorted(list(set(a)),reverse = True)
+    b.sort(reverse = True)
+    j = 0
+    l = len(a)
+    result = []
+    for i in range(len(b)):
+        while j<l and b[i]<a[j]:
+            j+=1
+        result.append(j+1)
+    return result[::-1]
+
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    scores_count = int(input())
+
+    scores = list(map(int, input().rstrip().split()))
+
+    alice_count = int(input())
+
+    alice = list(map(int, input().rstrip().split()))
+
+    result = climbingLeaderboard(scores, alice)
+
+    fptr.write('\n'.join(map(str, result)))
+    fptr.write('\n')
+
+    fptr.close()
